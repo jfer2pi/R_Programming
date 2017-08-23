@@ -1,0 +1,61 @@
+#Quiz 1 of Coursera R Programming Course
+#Utilizes hw1_data.csv
+
+#Set WD to R_Programming
+setwd("~/Dropbox/Coursera DS/R_Programming")
+hw1 <- read.table("hw1_data.csv", header = T, sep = ",")
+
+# What are the column names of the dataset?
+# We can use the head function to see this, or just colnames function
+
+names <- colnames(hw1)
+
+# Extract the first 2 rows of the data frame and print them to the console.
+# What does the output look like?  We can use the head function
+testa <- head(hw1,2)
+testa
+
+# How many observations are in this data frame? 
+# We can look at the environment window or use dim
+
+obs <- dim(hw1)
+
+# Extract the last 2 rows of the data frame and print them to the console.
+# What does the output look like?  We can use the tail function
+
+pied <- tail(hw1,2)
+pied
+
+# What is the value of ozone in the 47th row?  We can subset this dataset
+
+fortyseven <- hw1[[47,"Ozone"]]
+fortyseven
+
+# How many missing values are in the ozone column of this data frame?
+# We can use is.na to determine
+
+missing_ozone <- is.na(hw1[,"Ozone"])
+count_missing_ozone <- length(missing_ozone[missing_ozone == T])
+count_missing_ozone
+
+# What is the mean of the ozone column in the dataset?  Exclude missing values from 
+# this calculation.  We can use mean with the na.rm set to True
+
+mean_ozone <- mean(hw1[,"Ozone"], na.rm = T)
+mean_ozone
+
+# Extract the subset of rows of the data frame where ozone values are above 31 
+# and temp values are above 90.  What is the mean of Solar.R in this subset?
+# We may have to use the subset function
+
+sub_rows <- subset(hw1, Temp > 90 | Ozone > 31)
+mean_solar <- mean(sub_rows[,"Solar.R"], na.rm = T)
+mean_solar
+
+# What is the mean of Temp when Month is 6?
+mean_temp_june <- mean(subset(hw1,Month == 6)[,"Temp"], na.rm = T)
+mean_temp_june
+
+# What is the maximum ozone value in the month of May
+max_ozone_may <- max(subset(hw1, Month == 5)[,"Ozone"], na.rm = T)
+max_ozone_may
